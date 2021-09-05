@@ -7,10 +7,9 @@ const App = ()=>{
   const[board, setBoard] = useState(Array(9).fill(null));
   const[isXNext,setIsXNext] = useState(true);
   const winner = calculateWinner(board);
-  let message = "Next player";
+  const message = winner?`Winnner is ${winner}`:`Next player is ${isXNext?"X":"O"}`;
   const handleSquare = position=>{
       if (board[position]||winner){
-          message = `winner is ${winner}`
           return;
       }
       setBoard((prev)=>{
