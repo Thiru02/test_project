@@ -1,9 +1,12 @@
 import React from 'react'
 
-const StatusMessage = () => {
+const StatusMessage = ({winner,noMovesLeft, current}) => {
+    // const message = winner?`Winnner is ${winner}`:`Next player is ${current.isXNext?"X":"O"}`;
     return (
         <h2>
-            dd
+            {winner&&`Winner is ${winner}`}
+            {noMovesLeft && !winner && `X and O tied`}
+            {!noMovesLeft && !winner && `Next player is ${current.isXNext?"X":"O"}`}
         </h2>
     )
 }

@@ -7,11 +7,9 @@ import History from "./Components/History";
 
 const App = ()=>{
   const[history, setHistory] = useState([{board:Array(9).fill(null),isXNext:true}]);
-  console.log(history);
   const[count,setCount] = useState(0);
   const current = history[count];
-  const winner = calculateWinner(current.board);
-  const message = winner?`Winnner is ${winner}`:`Next player is ${current.isXNext?"X":"O"}`;
+  const {winner,winningSquares} = calculateWinner(current.board);
   const handleSquare = position=>{
       if (current.board[position]||winner){
           return;
@@ -31,11 +29,12 @@ const App = ()=>{
   const moveT=(move)=>{
     setCount(move);
   }
+  const noMovesLeft = current.board.every((el)=>el!==null);
   return (
     <div className="app">
       <h1>TICTACTOE</h1>
-      <StatusMessage/>
-      <Board board={current.board} handleSquare={handleSquare}/>
+      <StatusMessage winner={winner} noMovesLeft={noMovesLeft} current = {current}/>
+      <Board board={current.board} handleSquare={handleSquare} winningSquares={winningSquares}/>
       <History history={history} moveT={moveT} count={count}/>
     </div>
   );
